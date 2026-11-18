@@ -182,7 +182,7 @@ body,.mast,.cols p,.box p,.pp p,.pm p,#process .lead,#ct p,nav a{font-family:var
 .wbd{max-height:36vh}
 }
 #lg{display:inline-flex;gap:2px;margin-left:.6vw;align-items:center}#lg button{background:none;border:0;color:inherit;font:inherit;font-family:var(--osd);font-size:1.15rem;letter-spacing:1px;padding:2px 5px;cursor:pointer;opacity:.5;border-bottom:2px solid transparent}#lg button:hover{opacity:.9}#lg button[aria-pressed=true]{opacity:1;border-bottom-color:var(--coral)}@media(max-width:760px){nav div{gap:10px}#lg button{font-size:1.05rem;padding:2px 3px}}#home h1.re .c{animation-delay:calc(var(--k)*28ms)}
-#rt,#rh,#ld,#snd{display:none!important}#ft{top:11vh}@media(max-width:760px){#ft{top:12vh}}
+#rt,#rh,#ld{display:none!important}#ft{top:11vh}@media(max-width:760px){#ft{top:12vh}}
 </style>
 </head>
 <body>
@@ -333,7 +333,7 @@ const XP=[
  {y:'2024 - 2025',r:'Social Media',c:'UniféTV Portugal'},
  {y:'2024 - 2025',r:'Video Editor & Motion Designer',c:'UP Agency'}];
 /* If your reel is hosted somewhere (direct .mp4 link), put it here. Or use the LOAD MY REEL button. */
-const REEL_URL='reel-2026.mp4';
+const REEL_URL='reel-v9.mp4';
 const PAL=[['#16323a','#e8935a'],['#2a1a33','#f07860'],['#10262b','#6fc7b6'],['#331511','#f2b36b'],['#1d2a18','#c9d77a'],['#14202e','#7aa7e8']];
 const n=P.length,nx=XP.length,dots=$('#dots');
 P.forEach(()=>dots.insertAdjacentHTML('beforeend','<i></i>'));
@@ -569,7 +569,7 @@ function gl(t){
   if(w<=.0005){p.copy(CP.getPoint(e));tg.copy(LP.getPoint(e));if(cam.aspect<1.3){tg.x*=clamp((cam.aspect-.4)/.9);if(cam.aspect<.8)p.z+=1.4*(1-e)}}else tapePose(w,p,tg);
   const par=w>.0005?.2:.35*(1-e);p.x+=mp.sx*par;p.y-=mp.sy*par*.5;
   fl=Math.max(0,1-Math.abs(p.z-.78)/.75);fl=Math.min(.9,fl*fl*fl);
-  const crossed=w>.0005||p.z<.78;if(w>.0005)fl=0;SMK.visible=!crossed;FLOOR.visible=!crossed;G.visible=!crossed;TT.visible=w>.0005||st.r>.8;{const rr=st.r;RPL.visible=crossed&&w<=.0005;const d=6.5,vH=2*d*Math.tan(cam.fov*Math.PI/360),vW=vH*cam.aspect,fit=Math.min(vW*.94,vH*.94*16/9)/16,k=fit*(.72+.28*sm(clamp(rr/.3)))*(1+.05*rr),fd=1-sm(clamp((rr-.82)/.16));RPL.scale.setScalar(k*(1+.12*(1-fd)));RPM.opacity=fd;RPB.material.opacity=fd;if(VID&&st.h>.97&&!reelOn){reelOn=true;try{VID.currentTime=0}catch(e){}}else if(st.h<.9)reelOn=false;VH2+=((w<=.0005&&crossed&&rr<.99?1:0)-VH2)*.08;PU.vhs.value=0}
+  const crossed=w>.0005||p.z<.78;if(w>.0005)fl=0;SMK.visible=!crossed;FLOOR.visible=!crossed;G.visible=!crossed;TT.visible=w>.0005||st.r>.8;{const rr=st.r;RPL.visible=crossed&&w<=.0005;const d=6.5,vH=2*d*Math.tan(cam.fov*Math.PI/360),vW=vH*cam.aspect,fit=Math.min(vW*.94,vH*.94*16/9)/16,k=fit*(.72+.28*sm(clamp(rr/.3)))*(1+.05*rr),fd=1-sm(clamp((rr-.82)/.16));RPL.scale.setScalar(k*(1+.12*(1-fd)));RPM.opacity=fd;RPB.material.opacity=fd;if(VID&&st.h>.97&&!reelOn){reelOn=true;try{VID.currentTime=0}catch(e){}}else if(st.h<.9)reelOn=false;VH2+=((w<=.0005&&crossed&&rr<.99?1:0)-VH2)*.08;PU.vhs.value=0;if(VID)VID.volume=PLOPEN?0:clamp(1-st.w*40)}
   G.rotation.y=-.14*(1-e)+mp.sx*1.1*(1-e*.92)+Math.sin(t*.0004)*.015;G.rotation.x=mp.sy*.16*(1-e);
   const f=w>.04?fcont():0;
   ALLF.forEach(m=>{const k=m.userData.k;let d=Math.abs(k-f);d=Math.min(d,Math.abs(d-NR));const hv=(m.userData.i>=0&&m.userData.i===hoverI&&true)?.25:0;m.material.emissiveIntensity=.78*clamp(1.15-d*.28,.3,1)+hv});
@@ -601,7 +601,7 @@ function draw(){
  $('#h1').style.opacity=$('#sm').style.opacity=$('#sb').style.opacity=clamp(1-h*3);$('#ld').style.opacity=clamp(1-h*4);$('#ld').style.pointerEvents=h>.2?'none':'auto';
  if(k!==cachedK){cachedK=k;dts.forEach((d,i)=>d.classList.toggle('on',i==k));
   if(k<0){$('#wt').textContent=T('The Reel');$('#wc').textContent=T('Scroll to unwind it');$('#wl').style.display='none'}else{$('#wt').textContent=T(P[k].t);$('#wc').textContent=T(P[k].c)+' · ';$('#wl').style.display='';$('#wl').href='#'}}
- const rv=clamp((st.r-.06)/.1)*(1-clamp((st.r-.82)/.1));for(const q of['#rt','#rh','#snd'])$(q).style.opacity=rv;$('#snd').style.pointerEvents=rv>.5?'auto':'none';const wu=clamp(st.w*60);for(const q of['#wt','#dots','#prev','#next','#hint'])$(q).style.opacity=wu;$('#wl').parentNode.style.opacity=wu;const en=ENT?1:0;if(en!==cachedEnt){cachedEnt=en;$('#back').style.display='none';$('#hint').textContent=T('Click the side frames, or use the arrows')}
+ const rv=clamp((st.r-.06)/.1)*(1-clamp((st.r-.82)/.1));for(const q of['#rt','#rh'])$(q).style.opacity=rv;{const sv=Math.max(rv,1-clamp(st.h*4));$('#snd').style.opacity=sv;$('#snd').style.pointerEvents=sv>.5?'auto':'none'}const wu=clamp(st.w*60);for(const q of['#wt','#dots','#prev','#next','#hint'])$(q).style.opacity=wu;$('#wl').parentNode.style.opacity=wu;const en=ENT?1:0;if(en!==cachedEnt){cachedEnt=en;$('#back').style.display='none';$('#hint').textContent=T('Click the side frames, or use the arrows')}
  $('#tl').style.transform=`translate(${-a*1500+VW()*.1}px,${-a*180}px) scale(${1.7-a*.6}) rotateX(${8-a*8}deg)`;
  $('#ah').style.opacity=clamp(1-a*3);
  const fu=st.f*(nx+1.5),fk=clamp(Math.round(fu)-1,0,nx-1);if(fk!==cachedFk){cachedFk=fk;$('#fc').textContent=String(fk+1).padStart(2,'0')+' / '+String(nx).padStart(2,'0')}
@@ -616,7 +616,8 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 tick(0);
 
 const sndTxt=()=>{$('#snd').textContent=T(VID&&!VID.muted?'🔊 SOUND ON':'🔇 SOUND OFF')};
-$('#snd').onclick=()=>{if(VID){VID.muted=!VID.muted;sndTxt();VID.play&&VID.play()}};
+let sndUser=false;$('#snd').onclick=()=>{if(VID){sndUser=true;VID.muted=!VID.muted;sndTxt();VID.play&&VID.play()}};
+['pointerdown','keydown','touchend'].forEach(ev=>addEventListener(ev,e=>{if(sndUser||!VID||!VID.muted)return;if(e.target&&e.target.closest&&e.target.closest('#snd'))return;VID.muted=false;sndTxt();VID.play&&VID.play()},{passive:true}));
 
 /* ---------- project player ---------- */
 let plI=0;
